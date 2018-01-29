@@ -1,10 +1,12 @@
-package edu.westga.cs3211.project3;
+package edu.westga.cs3212.ServiceTechMobileApplication;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 
 /**
  * TODO App entry point.
@@ -15,6 +17,7 @@ import javafx.scene.Scene;
 public class Main extends Application {
 	public static final String MAIN_WINDOW_TITLE = "Visit Management";
 	public static final String MAIN_WINDOW = "view/MainWindow.fxml";
+	public static final String VISIT_VIEW = "view/VisitView.fxml";
 
 	/**
 	 * JavaFX entry point.
@@ -30,8 +33,7 @@ public class Main extends Application {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource(Main.MAIN_WINDOW));
 		loader.load();
-		Parent parent = loader.getRoot();
-		Scene scene = new Scene(parent);
+		Scene scene = new Scene(loader.getRoot());
 		primaryStage.setTitle(Main.MAIN_WINDOW_TITLE);
 		primaryStage.setScene(scene);
 		primaryStage.show();
