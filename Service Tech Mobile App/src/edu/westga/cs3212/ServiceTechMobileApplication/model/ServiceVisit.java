@@ -193,5 +193,10 @@ public class ServiceVisit {
 		}
 		this.tasks.add(task);
 	}
+	
+	@Override
+	public String toString() {
+		return this.description + ", " + this.customerAddress + ", " + this.scheduledStartTime;
+	}
 
 }
