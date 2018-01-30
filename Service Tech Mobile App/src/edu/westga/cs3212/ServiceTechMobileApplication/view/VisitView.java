@@ -23,49 +23,23 @@ import javafx.stage.Stage;
 * @version Spring2018
 */
 public class VisitView {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    private TextField completionTime;
-
-    @FXML
-    private Button updateStatusButton;
-
-    @FXML
-    private Button exitButton;
-
-    @FXML
-    private TextField address;
-
-    @FXML
-    private TextField actualStartTime;
-
-    @FXML
-    private TextField scheduledStartTime;
-
-    @FXML
-    private Button addTaskButton;
-
-    @FXML
-    private ListView<?> taskList;
-
-    @FXML
-    private TextArea description;
-
-    @FXML
-    private TextField customer;
-
-    @FXML
-    private TextField status;
+    @FXML private ResourceBundle resources;
+    @FXML private URL location;
+    @FXML private TextField completionTime;
+    @FXML private Button updateStatusButton;
+    @FXML private Button exitButton;
+    @FXML private TextField address;
+    @FXML private TextField actualStartTime;
+    @FXML private TextField scheduledStartTime;
+    @FXML private Button addTaskButton;
+    @FXML private ListView<?> taskList;
+    @FXML private TextArea description;
+    @FXML private TextField customer;
+    @FXML private TextField status;
 
     @FXML
     void taskSelected(MouseEvent event) throws IOException {
-    	System.out.println("task selected");
+    	System.out.println("task selected - not implemented");
     	Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		this.openTaskView(currentStage);
     }
@@ -80,19 +54,19 @@ public class VisitView {
 
     @FXML
     void updateStatus(ActionEvent event) {
-    	System.out.println("starting visit");
+    	System.out.println("starting visit - not implemented");
     }
 
     @FXML
     void addTask(ActionEvent event) throws IOException {
-    	System.out.println("task selected");
+    	System.out.println("add task - not implemented");
     	Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		this.openTaskView(currentStage);
     }
 
     @FXML
     void exit(ActionEvent event) throws IOException {
-    	System.out.println("return to landing screen");
+    	System.out.println("return to landing screen - not implemented");
     	Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource(Main.MAIN_WINDOW));

@@ -30,7 +30,7 @@ public class MainWindow {
 
     @FXML
     void visitSelected(MouseEvent event) throws IOException {
-    	System.out.println("visit selected");
+    	System.out.println("visit selected - not implemented");
     	Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource(Main.VISIT_VIEW));
