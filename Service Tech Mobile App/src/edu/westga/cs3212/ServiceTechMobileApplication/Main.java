@@ -9,7 +9,7 @@ import javafx.scene.Scene;
  * TODO App entry point.
  * 
  * @author CS3212
- * @version Spring2018
+ * @version Spring 2018
  */
 public class Main extends Application {
 	public static final String MAIN_WINDOW_TITLE = "Visit Management";

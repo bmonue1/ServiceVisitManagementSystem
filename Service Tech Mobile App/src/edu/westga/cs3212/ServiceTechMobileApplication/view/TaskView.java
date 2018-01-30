@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 /** Codebehind for the TaskView view.
 *
 * @author CS3212
-* @version Spring2018
+* @version Spring 2018
 */
 public class TaskView {
     @FXML private ResourceBundle resources;

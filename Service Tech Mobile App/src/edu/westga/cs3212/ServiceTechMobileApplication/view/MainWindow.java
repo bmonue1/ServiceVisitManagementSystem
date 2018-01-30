@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 /** Codebehind for the MainWindow view.
 *
 * @author CS3212
-* @version Spring2018
+* @version Spring 2018
 */
 public class MainWindow {
     @FXML private ResourceBundle resources;
