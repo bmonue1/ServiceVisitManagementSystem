@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 * @author CS3212
 * @version Spring 2018
 */
-public class MainWindow {
+public class VisitListView {
     @FXML private ResourceBundle resources;
     @FXML private URL location;
     @FXML private Button switchVisitsListButton;
@@ -33,11 +33,11 @@ public class MainWindow {
 
     @FXML
     void visitSelected(MouseEvent event) throws IOException {
-    	System.out.println("visit selected - not implemented");
     	Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource(Main.VISIT_VIEW));
 		loader.load();
+		((VisitView)loader.getController()).setServiceVisit(this.visitsList.getSelectionModel().getSelectedItem());
 		Scene visitView = new Scene(loader.getRoot());
 		currentStage.setScene(visitView);
     	
@@ -70,7 +70,7 @@ public class MainWindow {
         task1.setDescription("setup 'the box'");
         task1.addMaterial("splitter");
         Task task2 = new Task();
-        task1.setDescription("instruct customer on use of box");
+        task2.setDescription("instruct customer on use of box");
 		visit3.addTask(task1);
 		visit3.addTask(task2);
 		

@@ -2,9 +2,12 @@ package edu.westga.cs3212.ServiceTechMobileApplication.view;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 import edu.westga.cs3212.ServiceTechMobileApplication.Main;
+import edu.westga.cs3212.ServiceTechMobileApplication.model.ServiceVisit;
+import edu.westga.cs3212.ServiceTechMobileApplication.model.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,10 +35,37 @@ public class VisitView {
     @FXML private TextField actualStartTime;
     @FXML private TextField scheduledStartTime;
     @FXML private Button addTaskButton;
-    @FXML private ListView<?> taskList;
+    @FXML private ListView<Task> taskList;
     @FXML private TextArea description;
     @FXML private TextField customer;
-    @FXML private TextField status;
+    
+	private ServiceVisit visit;
+
+	public void setServiceVisit(ServiceVisit visit) {
+		this.visit = visit;
+		this.updateDisplay();
+	}
+
+	private void updateDisplay() {
+		this.description.setText(this.visit.getDescription());
+		this.customer.setText(this.visit.getCustomerName());
+		this.address.setText(this.visit.getCustomerAddress());
+		this.scheduledStartTime.setText(this.visit.getScheduledStartTime().toString());
+		if(this.visit.getCompletionTime() != null) {
+			this.actualStartTime.setText(this.visit.getActualStartTime().toString());
+			this.completionTime.setText(this.visit.getCompletionTime().toString());
+    		this.updateStatusButton.setText("");
+    		this.updateStatusButton.setDisable(true);
+		}
+		else if(this.visit.getActualStartTime() != null) {
+			this.actualStartTime.setText(this.visit.getActualStartTime().toString());
+			this.updateStatusButton.setText("End");
+		}
+		this.taskList.getItems().clear();
+		for (Task currentTask : this.visit.getTasks()) {
+			this.taskList.getItems().add(currentTask);
+		}
+	}
 
     @FXML
     void taskSelected(MouseEvent event) throws IOException {
@@ -54,7 +84,17 @@ public class VisitView {
 
     @FXML
     void updateStatus(ActionEvent event) {
-    	System.out.println("starting visit - not implemented");
+    	if(this.visit.getActualStartTime() == null) {
+    		this.visit.setActualStartTime(LocalDateTime.now());
+    		this.actualStartTime.setText(this.visit.getActualStartTime().toString());
+    		this.updateStatusButton.setText("End");
+    	}
+    	else if(this.visit.getCompletionTime() == null) {
+    		this.visit.setCompletionTime(LocalDateTime.now());
+    		this.completionTime.setText(this.visit.getCompletionTime().toString());
+    		this.updateStatusButton.setText("");
+    		this.updateStatusButton.setDisable(true);
+    	}
     }
 
     @FXML
@@ -66,7 +106,6 @@ public class VisitView {
 
     @FXML
     void exit(ActionEvent event) throws IOException {
-    	System.out.println("return to landing screen - not implemented");
     	Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource(Main.MAIN_WINDOW));
@@ -87,7 +126,6 @@ public class VisitView {
         assert taskList != null : "fx:id=\"taskList\" was not injected: check your FXML file 'VisitView.fxml'.";
         assert description != null : "fx:id=\"description\" was not injected: check your FXML file 'VisitView.fxml'.";
         assert customer != null : "fx:id=\"customer\" was not injected: check your FXML file 'VisitView.fxml'.";
-        assert status != null : "fx:id=\"status\" was not injected: check your FXML file 'VisitView.fxml'.";
 
     }
 }

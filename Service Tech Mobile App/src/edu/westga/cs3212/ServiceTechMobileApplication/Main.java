@@ -13,7 +13,7 @@ import javafx.scene.Scene;
  */
 public class Main extends Application {
 	public static final String MAIN_WINDOW_TITLE = "Visit Management";
-	public static final String MAIN_WINDOW = "view/MainWindow.fxml";
+	public static final String MAIN_WINDOW = "view/VisitListView.fxml";
 	public static final String VISIT_VIEW = "view/VisitView.fxml";
 	public static final String TASK_VIEW = "view/TaskView.fxml";
 

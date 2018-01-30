@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="800.0" prefWidth="480.0" style="-fx-border-radius: 30; -fx-border-width: 5; -fx-border-color: black; -fx-background-color: grey; -fx-background-radius: 35;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.ServiceTechMobileApplication.view.MainWindow">
+<AnchorPane prefHeight="800.0" prefWidth="480.0" style="-fx-border-radius: 30; -fx-border-width: 5; -fx-border-color: black; -fx-background-color: grey; -fx-background-radius: 35;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.ServiceTechMobileApplication.view.VisitListView">
    <children>
       <Circle layoutX="242.0" layoutY="777.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="733.0" layoutX="12.0" layoutY="13.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" style="-fx-arc-height: 45; -fx-arc-width: 45;" width="457.0" />

@@ -108,5 +108,8 @@ public class Task {
 		this.materials.add(material);
 	}
 	
-	
+	@Override
+	public String toString( ) {
+		return "(" + this.status + ") " + this.description;
+	}
 }
