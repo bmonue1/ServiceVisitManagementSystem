@@ -22,10 +22,12 @@ import javafx.stage.Stage;
  */
 public class LoginView {
     @FXML private ResourceBundle resources;
-    @FXML private URL location;
-    @FXML private TextField password;
-    @FXML private Button loginButton;
-    @FXML private TextField username;
+    @FXML private URL 			 location;
+    
+    @FXML private Button 		 loginButton;
+    
+    @FXML private TextField 	 username;
+    @FXML private TextField 	 password;
     
     private VisitManager manager;
 

@@ -24,10 +24,12 @@ import javafx.stage.Stage;
 * @version Spring 2018
 */
 public class VisitListView {
-    @FXML private ResourceBundle resources;
-    @FXML private URL location;
-    @FXML private Button switchVisitsListButton;
-    @FXML private Label visitsListHeader;
+    @FXML private ResourceBundle 		 resources;
+    @FXML private URL 					 location;
+    
+    @FXML private Button 				 switchVisitsListButton;
+    
+    @FXML private Label 				 visitsListHeader;
     @FXML private ListView<ServiceVisit> visitsList;
     
     private VisitManager manager;

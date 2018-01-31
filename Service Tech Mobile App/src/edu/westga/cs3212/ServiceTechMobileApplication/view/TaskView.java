@@ -79,7 +79,7 @@ public class TaskView implements ChangeListener<Task> {
      * 				  if active task is temporary and all details are valid:
      * 						task is added to active visit
      * 
-     * @param event
+     * @param event event that triggered this method
      * @throws IOException
      */
 	@FXML

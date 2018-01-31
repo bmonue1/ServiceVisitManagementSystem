@@ -10,13 +10,13 @@ import java.util.List;
  * @version Spring 2018
  */
 public class ServiceVisit {
-	private String description;
-	private String customerName;
-	private String customerAddress;
-	private LocalDateTime scheduledStartTime;
-	private LocalDateTime actualStartTime;
-	private LocalDateTime completionTime;
-	private List<Task> tasks;
+	private String 			description;
+	private String 			customerName;
+	private String 			customerAddress;
+	private LocalDateTime 	scheduledStartTime;
+	private LocalDateTime 	actualStartTime;
+	private LocalDateTime 	completionTime;
+	private List<Task> 		tasks;
 	
 	/** create a new ServiceVisit that has not been started yet.
 	 * 
@@ -61,9 +61,6 @@ public class ServiceVisit {
 
 	/** Get the description of the purpose for the service visit
 	 * 
-	 * @precondition none
-	 * @postcondition none
-	 * 
 	 * @return the description of the purpose for the service visit
 	 */
 	public String getDescription() {
@@ -71,9 +68,6 @@ public class ServiceVisit {
 	}
 
 	/** Get the name of the customer for the service visit
-	 * 
-	 * @precondition none
-	 * @postcondition none
 	 * 
 	 * @return the name of the customer for the service visit
 	 */
@@ -83,9 +77,6 @@ public class ServiceVisit {
 
 	/** Get the address of the customer for the service visit
 	 * 
-	 * @precondition none
-	 * @postcondition none
-	 * 
 	 * @return the address of the customer for the service visit
 	 */
 	public String getCustomerAddress() {
@@ -93,9 +84,6 @@ public class ServiceVisit {
 	}
 
 	/** Get the scheduled start time for the service visit
-	 * 
-	 * @precondition none
-	 * @postcondition none
 	 * 
 	 * @return the scheduled start time for the service visit
 	 */
@@ -105,9 +93,6 @@ public class ServiceVisit {
 
 	/** Get the actual start time for the service visit
 	 * 
-	 * @precondition none
-	 * @postcondition none
-	 * 
 	 * @return the actual start time for the service visit
 	 */
 	public LocalDateTime getActualStartTime() {
@@ -116,9 +101,6 @@ public class ServiceVisit {
 
 	/** Get the completion time for the service visit
 	 * 
-	 * @precondition none
-	 * @postcondition none
-	 * 
 	 * @return the completion time for the service visit
 	 */
 	public LocalDateTime getCompletionTime() {
@@ -126,9 +108,6 @@ public class ServiceVisit {
 	}
 
 	/** Get the list of tasks for the service visit
-	 * 
-	 * @precondition none
-	 * @postcondition none
 	 * 
 	 * @return the list of tasks for the service visit
 	 */

@@ -29,17 +29,19 @@ import javafx.stage.Stage;
 */
 public class VisitView implements ChangeListener<ServiceVisit> {
     @FXML private ResourceBundle resources;
-    @FXML private URL location;
-    @FXML private TextField completionTime;
-    @FXML private Button updateStatusButton;
-    @FXML private Button exitButton;
-    @FXML private TextField address;
-    @FXML private TextField actualStartTime;
-    @FXML private TextField scheduledStartTime;
-    @FXML private Button addTaskButton;
+    @FXML private URL 			 location;
+    
+    @FXML private Button 		 updateStatusButton;
+    @FXML private Button 		 exitButton;
+    @FXML private Button 		 addTaskButton;
+    
+    @FXML private TextArea 		 description;
+    @FXML private TextField 	 customer;
+    @FXML private TextField 	 address;
+    @FXML private TextField 	 scheduledStartTime;
+    @FXML private TextField 	 actualStartTime;
+    @FXML private TextField 	 completionTime;
     @FXML private ListView<Task> taskList;
-    @FXML private TextArea description;
-    @FXML private TextField customer;
     
     private VisitManager manager;
     
@@ -137,7 +139,7 @@ public class VisitView implements ChangeListener<ServiceVisit> {
      * @postcondition active task is a new temporary task &&
      * 				  TaskView is open
      * 
-     * @param event
+     * @param event event that triggered this method
      * @throws IOException
      */
     @FXML
