@@ -112,4 +112,16 @@ public class Task {
 	public String toString( ) {
 		return "(" + this.status + ") " + this.description;
 	}
+
+	/** Remove the material from the list of used materials
+	 * 
+	 * @precondition none
+	 * @postcondition if getMaterials().contains(material): getMaterials().size()@pre == getMaterials().size() + 1
+	 * 				  if !getMaterials().contains(material): getMaterials().size()@pre == getMaterials().size()
+	 * 
+	 * @param material material to be removed
+	 */
+	public void removeMaterial(String material) {
+		this.materials.remove(material);
+	}
 }

@@ -81,12 +81,15 @@ public class TaskView implements ChangeListener<Task> {
 
     @FXML
     void addMaterial(ActionEvent event) {
-    	System.out.println("add material - not implemented");
+    	this.manager.addMaterial(this.stockMaterialList.getValue());
     }
 
     @FXML
     void removeMaterial(MouseEvent event) {
-    	System.out.println("remove material - not implemented");
+    	String selectedMaterial = this.materialList.getSelectionModel().getSelectedItem();
+		if(selectedMaterial != null) {
+    		this.manager.removeMaterial(selectedMaterial);
+    	}
     }
 
     @FXML

@@ -204,4 +204,24 @@ public class VisitManager {
 		this.activeTask.set(task);
 	}
 
+	public void addMaterial(String material) {
+		Task task = this.activeTask.get();
+		if(task == null) {
+			throw new IllegalStateException("Unable to update status of active task: No active task has been set");
+		}
+		this.activeTask.set(null);
+		task.addMaterial(material);
+		this.activeTask.set(task);
+	}
+
+	public void removeMaterial(String material) {
+		Task task = this.activeTask.get();
+		if(task == null) {
+			throw new IllegalStateException("Unable to update status of active task: No active task has been set");
+		}
+		this.activeTask.set(null);
+		task.removeMaterial(material);
+		this.activeTask.set(task);
+	}
+
 }
