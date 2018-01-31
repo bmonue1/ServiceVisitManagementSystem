@@ -2,12 +2,10 @@ package edu.westga.cs3212.ServiceTechMobileApplication.view;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 import edu.westga.cs3212.ServiceTechMobileApplication.Main;
 import edu.westga.cs3212.ServiceTechMobileApplication.model.ServiceVisit;
-import edu.westga.cs3212.ServiceTechMobileApplication.model.Task;
 import edu.westga.cs3212.ServiceTechMobileApplication.view_model.VisitManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,7 +42,7 @@ public class VisitListView {
     public void setVisitManager(VisitManager manager) {
     	this.manager = manager;
     	this.visitsList.setItems(this.manager.getVisits());
-    	this.visitsList.selectionModelProperty().getValue().selectedItemProperty().addListener(this.manager);
+    	this.visitsList.selectionModelProperty().getValue().selectedItemProperty().addListener(this.manager.getActiveVisitListener());
     	
     	//.addListener(this.manager);
     }

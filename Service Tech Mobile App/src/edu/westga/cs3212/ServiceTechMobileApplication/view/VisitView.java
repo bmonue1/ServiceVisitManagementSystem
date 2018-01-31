@@ -2,7 +2,6 @@ package edu.westga.cs3212.ServiceTechMobileApplication.view;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 import edu.westga.cs3212.ServiceTechMobileApplication.Main;
@@ -55,6 +54,7 @@ public class VisitView implements ChangeListener<ServiceVisit> {
     	this.manager = manager;
     	this.updateDisplay(this.manager.getActiveVisit().get());
     	this.manager.getActiveVisit().addListener(this);
+    	this.taskList.selectionModelProperty().getValue().selectedItemProperty().addListener(this.manager.getActiveTaskListener());
     }
  
     /** Triggered when the state of the ActiveVisit has changed to update the displayed information and view state
@@ -104,17 +104,19 @@ public class VisitView implements ChangeListener<ServiceVisit> {
 	 */
     @FXML
     void taskSelected(MouseEvent event) throws IOException {
-    	System.out.println("task selected - not implemented");
     	Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		this.openTaskView(currentStage);
     }
 
 	private void openTaskView(Stage currentStage) throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource(Main.TASK_VIEW));
-		loader.load();
-		Scene visitView = new Scene(loader.getRoot());
-		currentStage.setScene(visitView);
+		if(this.taskList.getSelectionModel().getSelectedItem() !=  null) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource(Main.TASK_VIEW));
+			loader.load();
+			((TaskView)loader.getController()).setVisitManager(this.manager);
+			Scene visitView = new Scene(loader.getRoot());
+			currentStage.setScene(visitView);
+		}
 	}
 
     @FXML

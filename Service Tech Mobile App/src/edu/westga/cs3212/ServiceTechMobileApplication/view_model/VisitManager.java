@@ -2,13 +2,13 @@ package edu.westga.cs3212.ServiceTechMobileApplication.view_model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.westga.cs3212.ServiceTechMobileApplication.model.ServiceVisit;
 import edu.westga.cs3212.ServiceTechMobileApplication.model.Task;
+import edu.westga.cs3212.ServiceTechMobileApplication.model.TaskStatus;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -17,26 +17,123 @@ import javafx.collections.ObservableList;
  * @author CS3212
  * @version Spring 2018
  */
-public class VisitManager implements ChangeListener<ServiceVisit>{
+public class VisitManager {
 	private ObservableList<ServiceVisit> visits;
 	private ObjectProperty<ServiceVisit> activeVisit;
 	private ObjectProperty<Task> activeTask;
+	private ObservableList<String> availableMaterials;
+	private ObservableList<TaskStatus> taskStatusOptions;
+	private ActiveVisitListener activeVisitListener;
+	private ActiveTaskListener activeTaskListener;
 	
-	/** Create a new VisitManager loading in the appropriate service visits
+	/** Create a new VisitManager loading in the appropriate service visits and the available materials
 	 * 
 	 * @precondition none
 	 * @postcondition getActiveVisit() != null &&
 	 * 				  getActiveTask() != null &&
-	 * 				  getVisits() != null
+	 * 				  getVisits() != null &&
+	 * 				  getAvailableMaterials() != null
 	 * 
 	 */
 	public VisitManager() {
-		this.visits = FXCollections.observableList(new ArrayList<ServiceVisit>());
+		this.activeTaskListener = new ActiveTaskListener(this);
+		this.activeVisitListener = new ActiveVisitListener(this);
 		this.activeVisit = new SimpleObjectProperty<ServiceVisit>();
 		this.activeTask = new SimpleObjectProperty<Task>();
-		this.loadServiceVisits();
+		this.visits = FXCollections.observableList(this.loadServiceVisits());
+		this.availableMaterials = FXCollections.observableList(this.loadAvailableMaterials());
+		this.taskStatusOptions = FXCollections.observableList(this.loadTaskStatusOptions());
 	}
 	
+	private List<TaskStatus> loadTaskStatusOptions() {
+		List<TaskStatus> statusOptions = new ArrayList<TaskStatus>();
+		statusOptions.add(TaskStatus.ASSIGNED);
+		statusOptions.add(TaskStatus.COMPLETE);
+		statusOptions.add(TaskStatus.INCOMPLETE);
+		statusOptions.add(TaskStatus.UNNECESSARY);
+		return statusOptions;
+	}
+
+	private List<ServiceVisit> loadServiceVisits() {
+		//TODO remove these default visits when actual load process is implemented
+		ArrayList<ServiceVisit> visits = new ArrayList<ServiceVisit>();
+		
+		LocalDateTime scheduleStartTime = LocalDateTime.now();
+		ServiceVisit visit1 = new ServiceVisit("install service", "George", "3 Abbey Road, London NW8 9AY, England", scheduleStartTime);
+        ServiceVisit visit2 = new ServiceVisit("install service", "Paul", "3 Abbey Road, London NW8 9AY, England", scheduleStartTime.plusDays(1));
+        ServiceVisit visit3 = new ServiceVisit("install service", "John", "3 Abbey Road, London NW8 9AY, England", scheduleStartTime.plusDays(2));
+        ServiceVisit visit4 = new ServiceVisit("install service", "Ringo", "3 Abbey Road, London NW8 9AY, England", scheduleStartTime.plusDays(3));
+
+        Task task1 = new Task();
+        task1.setDescription("setup 'the box'");
+        task1.addMaterial("splitter");
+        Task task2 = new Task();
+        task2.setDescription("instruct customer on use of box");
+		visit3.addTask(task1);
+		visit3.addTask(task2);
+		
+        visit4.addTask(task1);
+        
+        visits.add(visit1);
+		visits.add(visit2);
+		visits.add(visit3);
+		visits.add(visit4);
+		
+		return visits;
+	}
+	
+	private List<String> loadAvailableMaterials() {
+		//TODO remove the default materials when the proper load process is implemented
+		ArrayList<String> availableMaterials = new ArrayList<String>();
+		availableMaterials.add("splitter");
+		availableMaterials.add("coax cable");
+		return availableMaterials;
+	}
+
+	/** Return a change listener to update the active task
+	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
+	 * @return change listener to update the active task
+	 */
+	public ActiveTaskListener getActiveTaskListener() {
+		return this.activeTaskListener;
+	}
+	
+	/** Return a change listener to update the active service visit
+	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
+	 * @return change listener to update the active service visit
+	 */
+	public ActiveVisitListener getActiveVisitListener() {
+		return this.activeVisitListener;
+	}
+	
+	/** Return the set of possible Task Statuses
+	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
+	 * @return the set of possible Task Statuses
+	 */
+	public ObservableList<TaskStatus> getTaskStatusOptions() {
+		return this.taskStatusOptions;
+	}
+	
+	/** Return the set of available materials
+	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
+	 * @return the set of available materials
+	 */
+	public ObservableList<String> getAvailableMaterials() {
+		return this.availableMaterials;
+	}
+
 	/** Return the set of visits currently loaded
 	 * 
 	 * @precondition none
@@ -70,31 +167,6 @@ public class VisitManager implements ChangeListener<ServiceVisit>{
 		return this.activeTask;
 	}
 	
-	private void loadServiceVisits() {
-		//TODO remove these default visits when actual load process is implemented
-		LocalDateTime scheduleStartTime = LocalDateTime.now();
-        
-		ServiceVisit visit1 = new ServiceVisit("install service", "George", "3 Abbey Road, London NW8 9AY, England", scheduleStartTime);
-        ServiceVisit visit2 = new ServiceVisit("install service", "Paul", "3 Abbey Road, London NW8 9AY, England", scheduleStartTime.plusDays(1));
-        ServiceVisit visit3 = new ServiceVisit("install service", "John", "3 Abbey Road, London NW8 9AY, England", scheduleStartTime.plusDays(2));
-        ServiceVisit visit4 = new ServiceVisit("install service", "Ringo", "3 Abbey Road, London NW8 9AY, England", scheduleStartTime.plusDays(3));
-
-        Task task1 = new Task();
-        task1.setDescription("setup 'the box'");
-        task1.addMaterial("splitter");
-        Task task2 = new Task();
-        task2.setDescription("instruct customer on use of box");
-		visit3.addTask(task1);
-		visit3.addTask(task2);
-		
-        visit4.addTask(task1);
-        
-		this.visits.add(visit1);
-		this.visits.add(visit2);
-		this.visits.add(visit3);
-		this.visits.add(visit4);
-	}
-	
 	/**Update the status of the activeVisit
 	 * 
 	 * @precondition getActiveVisit.get() != null
@@ -119,22 +191,6 @@ public class VisitManager implements ChangeListener<ServiceVisit>{
 	    		visit.setCompletionTime(LocalDateTime.now());
 	    		this.activeVisit.set(visit);
 	    	}
-		}
-	}
-
-	/** Updates the active visit if a new visit is selected
-	 * 
-	 * @precondition none
-	 * @postcondition if newVisit != null: getActiveVisit().get() == newVisit
-	 * 
-	 * @param selectedVisit property for the selected visit
-	 * @param oldVisit prior state of the selected visit
-	 * @param newVisit new state of the selected visit
-	 */
-	@Override
-	public void changed(ObservableValue<? extends ServiceVisit> selectedVisit, ServiceVisit oldVisit, ServiceVisit newVisit) {
-		if(newVisit != null) {
-			this.activeVisit.set(newVisit);
 		}
 	}
 
