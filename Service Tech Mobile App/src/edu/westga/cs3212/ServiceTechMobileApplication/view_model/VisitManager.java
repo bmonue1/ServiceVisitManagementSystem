@@ -179,7 +179,7 @@ public class VisitManager {
 	public void updateVisitStatus() {
 		ServiceVisit visit = this.activeVisit.get();
 		if(visit == null) {
-			throw new IllegalStateException("A service visit must be selected before updating the status");
+			throw new IllegalStateException("Unable to update active visit status: no active visit has been selected");
 		}
 		this.activeVisit.set(null);
 		if(visit != null) {
@@ -192,6 +192,16 @@ public class VisitManager {
 	    		this.activeVisit.set(visit);
 	    	}
 		}
+	}
+
+	public void updateTaskStatus(TaskStatus status) {
+		Task task = this.activeTask.get();
+		if(task == null) {
+			throw new IllegalStateException("Unable to update status of active task: No active task has been set");
+		}
+		this.activeTask.set(null);
+		task.setStatus(status);
+		this.activeTask.set(task);
 	}
 
 }

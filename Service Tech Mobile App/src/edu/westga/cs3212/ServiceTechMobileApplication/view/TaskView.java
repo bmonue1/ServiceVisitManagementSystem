@@ -59,6 +59,7 @@ public class TaskView implements ChangeListener<Task> {
 		this.description.setText(task.getDescription());
 		this.materialList.getItems().clear();
 		this.materialList.getItems().addAll(task.getMaterials());
+		this.statusList.setValue(task.getStatus());
 	}
 
 	@FXML
@@ -75,7 +76,7 @@ public class TaskView implements ChangeListener<Task> {
 
     @FXML
     void statusSelected(ActionEvent event) {
-    	System.out.println("status selected - not implemented");
+    	this.manager.updateTaskStatus(this.statusList.getValue());
     }
 
     @FXML
