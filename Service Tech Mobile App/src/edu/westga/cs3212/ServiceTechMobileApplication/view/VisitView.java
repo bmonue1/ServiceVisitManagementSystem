@@ -104,19 +104,19 @@ public class VisitView implements ChangeListener<ServiceVisit> {
 	 */
     @FXML
     void taskSelected(MouseEvent event) throws IOException {
-    	Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		this.openTaskView(currentStage);
+		if(this.taskList.getSelectionModel().getSelectedItem() !=  null) {
+			Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+			this.openTaskView(currentStage);
+		}
     }
 
 	private void openTaskView(Stage currentStage) throws IOException {
-		if(this.taskList.getSelectionModel().getSelectedItem() !=  null) {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource(Main.TASK_VIEW));
-			loader.load();
-			((TaskView)loader.getController()).setVisitManager(this.manager);
-			Scene visitView = new Scene(loader.getRoot());
-			currentStage.setScene(visitView);
-		}
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource(Main.TASK_VIEW));
+		loader.load();
+		((TaskView)loader.getController()).setVisitManager(this.manager);
+		Scene visitView = new Scene(loader.getRoot());
+		currentStage.setScene(visitView);
 	}
 
     @FXML
@@ -126,9 +126,9 @@ public class VisitView implements ChangeListener<ServiceVisit> {
 
     @FXML
     void addTask(ActionEvent event) throws IOException {
-    	System.out.println("add task - not implemented");
-    	//Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		//this.openTaskView(currentStage);
+    	this.manager.addTemporaryTask();
+    	Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		this.openTaskView(currentStage);
     }
 
     /** Return the visit list view

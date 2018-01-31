@@ -2,6 +2,7 @@ package edu.westga.cs3212.ServiceTechMobileApplication.view;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import edu.westga.cs3212.ServiceTechMobileApplication.Main;
@@ -15,7 +16,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -45,14 +49,20 @@ public class TaskView implements ChangeListener<Task> {
      * 
      * @param manager VisitManager to be used by this view
      */
-    public void setVisitManager(VisitManager manager) {
-    	this.manager = manager;
+    public void setVisitManager(VisitManager visitManager) {
+    	this.manager = visitManager;
     	this.manager.getActiveTask().addListener(this);
     	this.stockMaterialList.setItems(this.manager.getAvailableMaterials());
     	this.statusList.setItems(this.manager.getTaskStatusOptions());
     	if(this.manager.getActiveTask().get() != null) {
     		this.updateDisplay(this.manager.getActiveTask().get());
     	}
+    	this.description.textProperty().addListener(new ChangeListener<String>() {
+    	    @Override
+    	    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+    	        manager.updateTaskDescription(newValue);
+    	    }
+    	});
     }
 
     private void updateDisplay(Task task) {
@@ -64,7 +74,9 @@ public class TaskView implements ChangeListener<Task> {
 
 	@FXML
     void exit(ActionEvent event) throws IOException {
-    	System.out.println("return to Visit - not implemented");
+		if(this.manager.isTaskTemporary() && !this.addTask()) {
+			return;
+		}
     	Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource(Main.VISIT_VIEW));
@@ -74,7 +86,23 @@ public class TaskView implements ChangeListener<Task> {
 		currentStage.setScene(visitView);
     }
 
-    @FXML
+    private boolean addTask() {
+		String successMessage = this.manager.addTask(this.description.getText(), this.statusList.getValue(), this.materialList.getItems());
+		if(!successMessage.equals(VisitManager.TASK_ADD_SUCCESS)) {
+			String alertMessage = "The Task could not be added because," + System.lineSeparator() + successMessage + System.lineSeparator() + System.lineSeparator() + "Would you like to continue without adding the Task?";
+			Alert alert = new Alert(AlertType.CONFIRMATION, alertMessage);
+			Optional<ButtonType> result = alert.showAndWait();
+			 if (result.isPresent() && result.get() == ButtonType.OK) {
+			     return true;
+			 }
+			 else {
+				 return false;
+			 }
+		}
+		return true;
+	}
+
+	@FXML
     void statusSelected(ActionEvent event) {
     	this.manager.updateTaskStatus(this.statusList.getValue());
     }

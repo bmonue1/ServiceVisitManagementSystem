@@ -18,6 +18,8 @@ import javafx.collections.ObservableList;
  * @version Spring 2018
  */
 public class VisitManager {
+	public static final String TASK_ADD_SUCCESS = "SUCCESS";
+	
 	private ObservableList<ServiceVisit> visits;
 	private ObjectProperty<ServiceVisit> activeVisit;
 	private ObjectProperty<Task> activeTask;
@@ -25,6 +27,7 @@ public class VisitManager {
 	private ObservableList<TaskStatus> taskStatusOptions;
 	private ActiveVisitListener activeVisitListener;
 	private ActiveTaskListener activeTaskListener;
+	private boolean isTaskTemporary;
 	
 	/** Create a new VisitManager loading in the appropriate service visits and the available materials
 	 * 
@@ -36,6 +39,7 @@ public class VisitManager {
 	 * 
 	 */
 	public VisitManager() {
+		this.isTaskTemporary = false;
 		this.activeTaskListener = new ActiveTaskListener(this);
 		this.activeVisitListener = new ActiveVisitListener(this);
 		this.activeVisit = new SimpleObjectProperty<ServiceVisit>();
@@ -222,6 +226,64 @@ public class VisitManager {
 		this.activeTask.set(null);
 		task.removeMaterial(material);
 		this.activeTask.set(task);
+	}
+
+	public void addTemporaryTask() {
+		this.isTaskTemporary = true;
+		this.activeTask.set(new Task());
+	}
+
+	public void setActiveTask(Task newTask) {
+		this.activeTask.set(newTask);
+		this.isTaskTemporary = false;
+		
+	}
+
+	public void setActiveVisit(ServiceVisit newVisit) {
+		this.activeVisit.set(newVisit);
+	}
+	
+	public String addTask(String description, TaskStatus status, List<String> materials) {
+		String successMessage = "";
+		ServiceVisit activeVisit = this.activeVisit.get();
+		if (activeVisit == null) {
+			successMessage = "No active Visit.";
+		}
+		else if (!this.isTaskTemporary) {
+			successMessage = "Task is not temporary";
+		}
+		else {
+			try {
+				Task task = new Task();
+				task.setDescription(description);
+				task.setStatus(status);
+				task.getMaterials().addAll(materials);
+				activeVisit.addTask(task);
+				successMessage = VisitManager.TASK_ADD_SUCCESS;
+			}
+			catch (IllegalArgumentException e) {
+				successMessage = e.getMessage();
+			}
+		}
+		return successMessage;
+	}
+
+	public boolean isTaskTemporary() {
+		return this.isTaskTemporary;
+	}
+
+	public void updateTaskDescription(String description) {
+		Task activeTask = this.activeTask.get();
+		if(activeTask != null) {
+			try {
+				activeTask.setDescription(description);
+				this.activeTask.set(null);
+				this.activeTask.set(activeTask);
+			}
+			catch (IllegalArgumentException e) {
+				//if the new description is not valid then keep the old one
+			}
+		}
 	}
 
 }

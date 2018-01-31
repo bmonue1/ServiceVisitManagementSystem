@@ -26,7 +26,7 @@ class ActiveVisitListener implements ChangeListener<ServiceVisit>{
 	@Override
 	public void changed(ObservableValue<? extends ServiceVisit> selectedVisit, ServiceVisit oldVisit, ServiceVisit newVisit) {
 		if(newVisit != null) {
-			this.manager.getActiveVisit().set(newVisit);
+			this.manager.setActiveVisit(newVisit);
 		}
 	}
 

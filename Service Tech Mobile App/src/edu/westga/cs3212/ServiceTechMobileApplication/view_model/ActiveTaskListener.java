@@ -26,7 +26,7 @@ private VisitManager manager;
 	@Override
 	public void changed(ObservableValue<? extends Task> selectedTask, Task oldTask, Task newTask) {
 		if(newTask != null) {
-			this.manager.getActiveTask().set(newTask);
+			this.manager.setActiveTask(newTask);
 		}
 	}
 
