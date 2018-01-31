@@ -18,7 +18,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-/** Codebehind for the MainWindow view.
+/** Codebehind for the VisitListView view.
 *
 * @author CS3212
 * @version Spring 2018
@@ -43,8 +43,6 @@ public class VisitListView {
     	this.manager = manager;
     	this.visitsList.setItems(this.manager.getVisits());
     	this.visitsList.selectionModelProperty().getValue().selectedItemProperty().addListener(this.manager.getActiveVisitListener());
-    	
-    	//.addListener(this.manager);
     }
 
     /** Switch to the VisitView if a visit has been selected

@@ -119,11 +119,27 @@ public class VisitView implements ChangeListener<ServiceVisit> {
 		currentStage.setScene(visitView);
 	}
 
+	/** Update the status of the active visit
+	 * 
+	 * @precondition none
+	 * @postcondition status of the active visit has been updated
+	 * 
+	 * @param event event that triggered this method
+	 */
     @FXML
     void updateStatus(ActionEvent event) {
     	this.manager.updateVisitStatus();
     }
 
+    /** Create a temporary task and open the TaskView
+     * 
+     * @precondition none
+     * @postcondition active task is a new temporary task &&
+     * 				  TaskView is open
+     * 
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void addTask(ActionEvent event) throws IOException {
     	this.manager.addTemporaryTask();

@@ -198,6 +198,16 @@ public class VisitManager {
 		}
 	}
 
+	/** Update the status of the active task
+	 * 
+	 * @precondition none
+	 * @postcondition if getActiveTask().get() == null:
+	 * 						none
+	 * 				  else:
+	 * 						this.activeTask.get().getStatus() == status
+	 * 
+	 * @param status new status for the active task
+	 */
 	public void updateTaskStatus(TaskStatus status) {
 		Task task = this.activeTask.get();
 		if(task == null) {
@@ -208,6 +218,17 @@ public class VisitManager {
 		this.activeTask.set(task);
 	}
 
+
+	/** Add the selected material to the active task
+	 * 
+	 * @precondition none
+	 * @postcondition if getActiveTask().get() == null:
+	 * 						none
+	 * 				  else:
+	 * 						this.activeTask.get().getMaterials().size()@pre == this.activeTask.get().getMaterials().size() + 1
+	 * 
+	 * @param material material to be added
+	 */
 	public void addMaterial(String material) {
 		Task task = this.activeTask.get();
 		if(task == null) {
@@ -218,6 +239,16 @@ public class VisitManager {
 		this.activeTask.set(task);
 	}
 
+	/** Remove the selected material from the active task
+	 * 
+	 * @precondition none
+	 * @postcondition if getActiveTask().get() == null || !this.activeTask.get().getMaterials().contains(material):
+	 * 						none
+	 * 				  else:
+	 * 						this.activeTask.get().getMaterials().size()@pre == this.activeTask.get().getMaterials().size() - 1
+	 * 
+	 * @param material material to be removed
+	 */
 	public void removeMaterial(String material) {
 		Task task = this.activeTask.get();
 		if(task == null) {
@@ -228,21 +259,58 @@ public class VisitManager {
 		this.activeTask.set(task);
 	}
 
+	/** Add a new temporary task
+	 * 
+	 * @precondition none
+	 * @postcondition getActiveTask.get() == new Task() &&
+	 * 				  isTaskTemporary() == true
+	 */
 	public void addTemporaryTask() {
 		this.isTaskTemporary = true;
 		this.activeTask.set(new Task());
 	}
 
+
+	/** Set the active task
+	 * 
+	 * @precondition none
+	 * @postcondition getActiveTask.get() == newTask &&
+	 * 				  isTaskTemporary() == false
+	 * 
+	 * @param newTask new task to make active
+	 */
 	public void setActiveTask(Task newTask) {
 		this.activeTask.set(newTask);
 		this.isTaskTemporary = false;
 		
 	}
 
+	/** Set the active visit
+	 * 
+	 * @precondition none
+	 * @postcondition getActiveVisit.get() == newVisit
+	 * 
+	 * @param newVisit new visit to make active
+	 */
 	public void setActiveVisit(ServiceVisit newVisit) {
 		this.activeVisit.set(newVisit);
 	}
 	
+	/** Attempts to add a new task with the specified information
+	 * 
+	 * @precondition none
+	 * @postcondition if getActiveTask().get() == null || getActiveVisit.get() == null :
+	 * 						none
+	 * 				  else:
+	 * 						getActiveVisit.get().getTasks().contains(the new task)
+	 * 
+	 * @param description description of the new task
+	 * @param status status of the new task
+	 * @param materials list of materials for the new task
+	 * 
+	 * @return TASK_ADD_SUCCESS if task was added
+	 * 		   message describing error if task was not added
+	 */
 	public String addTask(String description, TaskStatus status, List<String> materials) {
 		String successMessage = "";
 		ServiceVisit activeVisit = this.activeVisit.get();
@@ -268,10 +336,28 @@ public class VisitManager {
 		return successMessage;
 	}
 
+	/** Check if the active task is temporary
+	 * 
+	 * @precondition none
+	 * @postcondition none
+	 * 
+	 * @return true if the active task is temporary
+	 * 		   false if the active task is not temporary
+	 */
 	public boolean isTaskTemporary() {
 		return this.isTaskTemporary;
 	}
 
+	/** Update the description of the active task
+	 * 
+	 * @precondition none
+	 * @postcondition if getActiveTask.get() != null: 
+	 * 						getActiveTask.get().getDescription() == description
+	 * 				  if getActiveTask.get() == null:
+	 * 						none
+	 * 
+	 * @param description the new description for the active task
+	 */
 	public void updateTaskDescription(String description) {
 		Task activeTask = this.activeTask.get();
 		if(activeTask != null) {

@@ -4,10 +4,22 @@ import edu.westga.cs3212.ServiceTechMobileApplication.model.ServiceVisit;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
+/** Listen for new visit selection and updates the associated VisitManager.
+ * 
+ * @author CS3212
+ * @version Spring 2018
+ */
 class ActiveVisitListener implements ChangeListener<ServiceVisit>{
 	
 	private VisitManager manager;
 	
+	/** Create a new ActiveVisitListener associated with the specified VisitManager
+	 * 
+	 * @precondition manager != null
+	 * @postcondition none
+	 * 
+	 * @param manager associated VisitManager for this ActiveVisitListener
+	 */
 	public ActiveVisitListener(VisitManager manager) {
 		this.manager = manager;
 	}

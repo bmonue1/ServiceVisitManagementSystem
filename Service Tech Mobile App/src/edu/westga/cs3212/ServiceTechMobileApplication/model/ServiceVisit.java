@@ -6,7 +6,7 @@ import java.util.List;
 
 /** Store and manage information for a single Service Visit
  * 
- * @author jcorley
+ * @author CS3212
  * @version Spring 2018
  */
 public class ServiceVisit {

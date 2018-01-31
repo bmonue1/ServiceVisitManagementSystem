@@ -1,5 +1,10 @@
 package edu.westga.cs3212.ServiceTechMobileApplication.model;
 
+/** Valid status options for Tasks
+ * 
+ * @author CS3212
+ * @version Spring 2018
+ */
 public enum TaskStatus {
 	ASSIGNED,
 	INCOMPLETE,

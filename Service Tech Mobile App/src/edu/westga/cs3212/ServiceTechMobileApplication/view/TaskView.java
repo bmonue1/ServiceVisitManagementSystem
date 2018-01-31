@@ -72,6 +72,16 @@ public class TaskView implements ChangeListener<Task> {
 		this.statusList.setValue(task.getStatus());
 	}
 
+    /** Return to the VisitView and add the task if it is temporary
+     * 
+     * @precondition none
+     * @postcondition VisitView is loaded
+     * 				  if active task is temporary and all details are valid:
+     * 						task is added to active visit
+     * 
+     * @param event
+     * @throws IOException
+     */
 	@FXML
     void exit(ActionEvent event) throws IOException {
 		if(this.manager.isTaskTemporary() && !this.addTask()) {
@@ -89,7 +99,10 @@ public class TaskView implements ChangeListener<Task> {
     private boolean addTask() {
 		String successMessage = this.manager.addTask(this.description.getText(), this.statusList.getValue(), this.materialList.getItems());
 		if(!successMessage.equals(VisitManager.TASK_ADD_SUCCESS)) {
-			String alertMessage = "The Task could not be added because," + System.lineSeparator() + successMessage + System.lineSeparator() + System.lineSeparator() + "Would you like to continue without adding the Task?";
+			String alertMessage = "The Task could not be added because," + System.lineSeparator() + 
+								  successMessage + System.lineSeparator() + 
+								  System.lineSeparator() + 
+								  "Would you like to continue without adding the Task?";
 			Alert alert = new Alert(AlertType.CONFIRMATION, alertMessage);
 			Optional<ButtonType> result = alert.showAndWait();
 			 if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -102,16 +115,40 @@ public class TaskView implements ChangeListener<Task> {
 		return true;
 	}
 
+    /** Update the active task to the selected status
+     * 
+     * @precondition none
+     * @postcondition status of the active task has been updated appropriately
+     * 
+     * @param event event that triggered this method
+     */
 	@FXML
     void statusSelected(ActionEvent event) {
     	this.manager.updateTaskStatus(this.statusList.getValue());
     }
 
+	/** Add the currently selected material to the active task
+	 * 
+	 * @precondition none
+	 * @postcondition material is added to the active task
+	 * 
+	 * @param event event that triggered this method
+	 */
     @FXML
     void addMaterial(ActionEvent event) {
     	this.manager.addMaterial(this.stockMaterialList.getValue());
     }
 
+    /** Remove the selected material
+     * 
+     * @precondition none
+     * @postcondition if no material is selected: 
+     * 						none
+     * 				  else:
+     * 						selected material is removed
+     * 
+     * @param event event that triggered this method
+     */
     @FXML
     void removeMaterial(MouseEvent event) {
     	String selectedMaterial = this.materialList.getSelectionModel().getSelectedItem();
@@ -130,6 +167,15 @@ public class TaskView implements ChangeListener<Task> {
 
     }
 
+    /** Update display when the active task is changed
+     * 
+     * @precondition none
+     * @postcondition display is updated accordingly
+     * 
+     * @param activeTask the active task
+     * @param oldTask previous state of the active task
+     * @param newTask new state of the active task
+     */
 	@Override
 	public void changed(ObservableValue<? extends Task> activeTask, Task oldTask, Task newTask) {
 		if(newTask != null) {

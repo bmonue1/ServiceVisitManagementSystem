@@ -15,6 +15,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/** Codebehind for the LoginView view
+ * 
+ * @author CS3212
+ * @version Spring 2018
+ */
 public class LoginView {
     @FXML private ResourceBundle resources;
     @FXML private URL location;
@@ -24,6 +29,14 @@ public class LoginView {
     
     private VisitManager manager;
 
+    /** Login the current user and switch to VisitListView
+     * 
+     * @precondition none
+     * @postcondition VisitListView is loaded && ServiceVisits for user are loaded
+     * 
+     * @param event event that triggered this method
+     * @throws IOException
+     */
     @FXML
     void login(ActionEvent event) throws IOException {
     	Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();

@@ -4,10 +4,22 @@ import edu.westga.cs3212.ServiceTechMobileApplication.model.Task;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
+/** Listen for new task selection and updates the associated VisitManager.
+ * 
+ * @author CS3212
+ * @version Spring 2018
+ */
 class ActiveTaskListener implements ChangeListener<Task>{
 	
 private VisitManager manager;
 	
+	/** Create a new ActiveTaskListener associated with the specified VisitManager
+	 * 
+	 * @precondition manager != null
+	 * @postcondition none
+	 * 
+	 * @param manager associated VisitManager for this ActiveTaskListener
+	 */
 	public ActiveTaskListener(VisitManager manager) {
 		this.manager = manager;
 	}
