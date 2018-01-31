@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="480.0" style="-fx-border-radius: 30; -fx-border-width: 5; -fx-border-color: black; -fx-background-color: grey; -fx-background-radius: 35;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3212.ServiceTechMobileApplication.view.LoginView">
+	<children>
+		<Circle layoutX="242.0" layoutY="777.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="733.0" layoutX="12.0" layoutY="13.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" style="-fx-arc-height: 45; -fx-arc-width: 45;" width="457.0" />
+      <Button fx:id="loginButton" layoutX="175.0" layoutY="487.0" mnemonicParsing="false" onAction="#login" prefHeight="88.0" prefWidth="112.0" text="LOGIN">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Label layoutX="197.0" layoutY="280.0" text="Username" />
+      <Label layoutX="199.0" layoutY="364.0" text="Password" />
+      <TextField fx:id="username" layoutX="137.0" layoutY="301.0" />
+      <TextField fx:id="password" layoutX="137.0" layoutY="385.0" />
+	</children>
+</AnchorPane>

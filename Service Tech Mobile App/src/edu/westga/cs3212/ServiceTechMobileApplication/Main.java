@@ -12,10 +12,11 @@ import javafx.scene.Scene;
  * @version Spring 2018
  */
 public class Main extends Application {
-	public static final String MAIN_WINDOW_TITLE = "Visit Management";
-	public static final String MAIN_WINDOW = "view/VisitListView.fxml";
+	public static final String WINDOW_TITLE = "Visit Management";
+	public static final String VISIT_LIST_VIEW = "view/VisitListView.fxml";
 	public static final String VISIT_VIEW = "view/VisitView.fxml";
 	public static final String TASK_VIEW = "view/TaskView.fxml";
+	public static final String LOGIN_VIEW = "view/LoginView.fxml";
 
 	/**
 	 * JavaFX entry point.
@@ -29,10 +30,10 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource(Main.MAIN_WINDOW));
+		loader.setLocation(Main.class.getResource(Main.LOGIN_VIEW));
 		loader.load();
 		Scene scene = new Scene(loader.getRoot());
-		primaryStage.setTitle(Main.MAIN_WINDOW_TITLE);
+		primaryStage.setTitle(Main.WINDOW_TITLE);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
