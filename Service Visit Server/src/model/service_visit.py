@@ -2,6 +2,7 @@
 Store information for a single ServiceVisit
 '''
 class ServiceVisit:
+    _idCounter = 0
     
     '''
     Create a new ServiceVisit with the provided information
@@ -33,6 +34,22 @@ class ServiceVisit:
             self._tasks = []
         else:
             self._tasks = tasks
+        self._visitId = self._getNextId()
+    
+    '''
+    Determines the next id to be used
+    '''
+    def _getNextId(self):
+        ServiceVisit._idCounter+=1
+        return ServiceVisit._idCounter
+
+    '''
+    Get the id for the visit
+    
+    @return the id for the visit
+    '''
+    def getVisitId(self):
+        return self._visitId
             
     '''
     Gets the name of the customer for the visit

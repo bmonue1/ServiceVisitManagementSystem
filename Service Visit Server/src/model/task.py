@@ -35,8 +35,9 @@ class Task:
         else:
             self._materials = materials
         self._taskId = self._getNextId()
+    
     '''
-    Determines the next task id to be used
+    Determines the next id to be used
     '''
     def _getNextId(self):
         Task._idCounter+=1
