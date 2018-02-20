@@ -15,6 +15,6 @@ Running example for SE2 Spring 2018
 5. Install ZeroMQ 4.0.4 (http://zeromq.org/intro:get-the-software)
 6. Install the Python bindings for ZeroMQ (from cmd line 'pip install pyzmq' OR see http://zeromq.org/bindings:python for more instructions)
 7. Import the Service Visit Server Project into Eclipse
-8. <optional> Import the ZeroMQ Samples project into Eclipse
+8. (optional) Import the ZeroMQ Samples project into Eclipse
   
 NOTE: You may need to specify zmq as a builtin to avoid Eclipse indicating (false-positive) build errors due to failing to find certain zmq items (e.g., zmq.REQ). Within Eclipse select Window->Preferences->PyDev->Interpreters->Python Interpreter->Forced Builtins->New and add zmq.
