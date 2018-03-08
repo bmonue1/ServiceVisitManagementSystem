@@ -1,0 +1,13 @@
+SERVER_PROTOCOL = "tcp"
+SERVER_IP = "127.0.0.1"
+SERVER_PORT = "5555"
+SERVER_LOCATION = "{0}://{1}:{2}".format(SERVER_PROTOCOL, SERVER_IP, SERVER_PORT)
+
+SUCCESS_STATUS = "success"
+FAIL_STATUS = "fail"
+SUCCESS_MESSAGE = ""
+FAIL_ID = -1
+
+KEY_STATUS = "status"
+KEY_SERVICE_ID = "service id"
+KEY_MESSAGE = "message//9   "
